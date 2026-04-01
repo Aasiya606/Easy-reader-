@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Reader Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="home-view" class="view-container">
+        <nav class="sidebar">
+            <h1 class="logo">Easy Reader</h1>
+            <div class="manual">
+                <h2>Instruction Manual</h2>
+                <p><strong>1. Enter Text:</strong> Paste a URL or type directly into the workspace.</p>
+                <p><strong>2. Adjust Style:</strong> Use the sidebar to expand controls for Font, Spacing, and Contrast.</p>
+                <p><strong>3. Listen:</strong> Use the Play/Pause buttons to hear your text read aloud.</p>
+            </div>
+        </nav>
+        <main class="content-area center">
+            <div class="cta-arrow" onclick="switchView('reader-view')">
+                <i class="fa-solid fa-circle-arrow-right"></i>
+                <p>go to next page</p>
+            </div>
+        </main>
+    </div>
+
+    <div id="reader-view" class="view-container" style="display: none;">
+        <nav class="sidebar scrollable">
+            <button class="accordion">Font Style</button>
+            <div class="panel">
+                <button onclick="applyFont('Arial')">Standard (Arial)</button>
+                <button onclick="applyFont('OpenDyslexic')">OpenDyslexic</button>
+                <button onclick="applyFont('Comic Sans MS')">Comic Sans (Readable)</button>
+            </div>
+
+            <button class="accordion">Contrast Control</button>
+            <div class="panel">
+                <button onclick="applyContrast('default')">Standard</button>
+                <button onclick="applyContrast('high')">High Contrast (Yellow/Black)</button>
+                <button onclick="applyContrast('soft')">Soft Mode (Creme/Dark Blue)</button>
+            </div>
+
+            <button class="accordion">Line Spacing</button>
+            <div class="panel">
+                <button onclick="applyLineHeight(1)">Single</button>
+                <button onclick="applyLineHeight(1.15)">1.15</button>
+                <button onclick="applyLineHeight(1.5)">1.5</button>
+                <button onclick="applyLineHeight(2)">Double</button>
+                <button onclick="alert('Custom Spacing: Use Slider')">Custom Spacing</button>
+            </div>
+
+            <button class="accordion">Text to Speech</button>
+            <div class="panel">
+                <div class="tts-controls">
+                    <button onclick="speakText()"><i class="fa-solid fa-play"></i></button>
+                    <button onclick="stopSpeech()"><i class="fa-solid fa-pause"></i></button>
+                </div>
+                <label>Playback Speed</label>
+                <input type="range" id="tts-rate" min="0.5" max="2" step="0.1" value="1">
+            </div>
+
+            <button class="accordion">Text Size</button>
+            <div class="panel">
+                <input type="range" id="size-slider" min="12" max="48" value="20" oninput="adjustSize()">
+            </div>
+        </nav>
+
+        <main class="content-area">
+            <header class="top-bar">
+                <button>ORIGINAL TEXT</button>
+                <button class="active">MAKE YOUR ADJUSTMENTS</button>
+                <button>NEW TEXT</button>
+            </header>
+            <div class="workspace">
+                <div class="input-bar">
+                    <input type="text" id="url-input" placeholder="Paste URL link here...">
+                    <button onclick="fetchURL()">Load URL</button>
+                </div>
+                <div id="text-square" contenteditable="true">
+                    Type your text here or paste a link above...
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
